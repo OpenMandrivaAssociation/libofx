@@ -3,7 +3,7 @@
 
 Summary: LibOFX library provides support for OFX command responses
 Name: libofx
-Version: 0.8.2
+Version: 0.8.3
 Release: %mkrel 1
 Source: http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
 Group:	System/Libraries
@@ -11,7 +11,6 @@ License: GPL
 URL: http://libofx.sourceforge.net
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: OpenSP-devel
-BuildRequires: libcurl-devel
 
 %description
 This is the LibOFX library.  It is a API designed to allow applications to
@@ -54,7 +53,8 @@ Libraries needed to develop for libofx.
 
 %build
 # FIXME: better make it lib64 aware in configure script
-%configure2_5x --with-opensp-libs=%{_libdir}
+# disable curl detection
+%configure2_5x --with-opensp-libs=%{_libdir} --without-libcurl
 
 %make
 
