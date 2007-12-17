@@ -9,7 +9,6 @@ Source: http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
 Group:	System/Libraries
 License: GPL
 URL: http://libofx.sourceforge.net
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: OpenSP-devel
 
 %description
