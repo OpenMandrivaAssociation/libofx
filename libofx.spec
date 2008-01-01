@@ -1,10 +1,10 @@
-%define lib_major 3
+%define lib_major 4
 %define lib_name %mklibname ofx %{lib_major}
 
 Summary: LibOFX library provides support for OFX command responses
 Name: libofx
-Version: 0.8.3
-Release: %mkrel 2
+Version: 0.9.0
+Release: %mkrel 1
 Source: http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
 Group:	System/Libraries
 License: GPL
@@ -91,5 +91,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
-
-
