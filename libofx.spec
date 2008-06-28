@@ -5,13 +5,16 @@
 Summary:	LibOFX library provides support for OFX command responses
 Name:		libofx
 Version:	0.9.0
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group:		System/Libraries
 License:	GPL
 URL:		http://libofx.sourceforge.net
-Source:		http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
+Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
+Patch0:		libofx-gcc43.diff
+BuildRequires:	doxygen
+BuildRequires:	graphviz
 BuildRequires:	OpenSP-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This is the LibOFX library.  It is a API designed to allow applications to
@@ -26,8 +29,6 @@ OpenSP, it should be compatible with all recent versions of OpenSP (It has
 been developed with OpenSP-1.5pre5).  LibOFX is written in C++, but provides a
 C style interface usable transparently from both C and C++ using a single
 include file.
-
-
 
 %package -n %{libname}
 Summary:	Libraries for libofx
@@ -51,12 +52,16 @@ Obsoletes:	%mklibname ofx 3 -d
 Libraries needed to develop for libofx.
 
 %prep
+
 %setup -q
+%patch0 -p1
 
 %build
 # FIXME: better make it lib64 aware in configure script
 # disable curl detection
-%configure2_5x --with-opensp-libs=%{_libdir} --without-libcurl
+%configure2_5x \
+    --with-opensp-libs=%{_libdir} \
+    --without-libcurl
 
 %make
 
@@ -68,9 +73,6 @@ rm -rf %{buildroot}
 #remove unpackaged files
 rm -rf %{buildroot}%{_docdir}/libofx
 
-%clean
-rm -rf %{buildroot}
-
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
 %endif
@@ -78,6 +80,9 @@ rm -rf %{buildroot}
 %if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
 %endif
+
+%clean
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
