@@ -4,13 +4,12 @@
 
 Summary:	LibOFX library provides support for OFX command responses
 Name:		libofx
-Version:	0.9.1
-Release:	%mkrel 3
+Version:	0.9.2
+Release:	%mkrel 1
 Group:		System/Libraries
 License:	GPL
 URL:		http://libofx.sourceforge.net
 Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
-Patch0:		libofx-gcc43.diff
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 BuildRequires:	OpenSP-devel
@@ -54,7 +53,6 @@ Libraries needed to develop for libofx.
 %prep
 
 %setup -q
-%patch0 -p1
 
 %build
 # FIXME: better make it lib64 aware in configure script
