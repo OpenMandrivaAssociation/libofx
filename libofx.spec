@@ -4,16 +4,15 @@
 
 Summary:	LibOFX library provides support for OFX command responses
 Name:		libofx
-Version:	0.9.4
-Release:	%mkrel 1
+Version:	0.9.5
+Release:	1
 Group:		System/Libraries
 License:	GPL
 URL:		http://libofx.sourceforge.net
-Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.bz2
+Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	graphviz
 BuildRequires:	OpenSP-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This is the LibOFX library.  It is a API designed to allow applications to
@@ -32,7 +31,6 @@ include file.
 %package -n %{libname}
 Summary:	Libraries for libofx
 Group:		System/Libraries
-Requires:	%{name} >= %{version}-%{release}
 
 %description -n %{libname}
 This package provides libraries to use libofx.
@@ -42,22 +40,19 @@ Group:		Development/C
 Summary:	Libraries needed to develop for libofx
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Requires:	OpenSP-devel
 Conflicts:	%{_lib}ofx2-devel < 0.8.2
-Provides:	%mklibname ofx 3 -d
-Obsoletes:	%mklibname ofx 3 -d
 
 %description -n %{develname}
 Libraries needed to develop for libofx.
 
 %prep
-
 %setup -q
 
 %build
 # FIXME: better make it lib64 aware in configure script
 # disable curl detection
 %configure2_5x \
+	--disable-static \
     --with-opensp-libs=%{_libdir} \
     --without-libcurl
 
@@ -71,33 +66,17 @@ rm -rf %{buildroot}
 #remove unpackaged files
 rm -rf %{buildroot}%{_docdir}/libofx
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog NEWS README totest.txt 
 %{_bindir}/*
 %{_datadir}/libofx
 %_mandir/man1/ofxdump.1*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc doc/html doc/ofx_sample_files
-%{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
