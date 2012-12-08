@@ -80,3 +80,103 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %{_libdir}/*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
+
+
+%changelog
+* Sun May 15 2011 GÃ¶tz Waschk <waschk@mandriva.org> 0.9.4-1mdv2011.0
++ Revision: 674937
+- new version
+- add ofxdump man page
+
+* Mon May 02 2011 Oden Eriksson <oeriksson@mandriva.com> 0.9.2-2
++ Revision: 662388
+- mass rebuild
+
+* Wed Feb 16 2011 GÃ¶tz Waschk <waschk@mandriva.org> 0.9.2-1
++ Revision: 638018
+- new version
+- drop patch
+
+* Sun Nov 28 2010 Oden Eriksson <oeriksson@mandriva.com> 0.9.1-3mdv2011.0
++ Revision: 602589
+- rebuild
+
+* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 0.9.1-2mdv2010.1
++ Revision: 520891
+- rebuilt for 2010.1
+
+* Tue Sep 29 2009 Frederik Himpe <fhimpe@mandriva.org> 0.9.1-1mdv2010.0
++ Revision: 451094
+- update to new version 0.9.1
+
+* Wed Sep 02 2009 Christophe Fergeau <cfergeau@mandriva.com> 0.9.0-5mdv2010.0
++ Revision: 425647
+- rebuild
+
+* Sat Mar 07 2009 Antoine Ginies <aginies@mandriva.com> 0.9.0-4mdv2009.1
++ Revision: 351465
+- rebuild
+
+* Sat Jun 28 2008 Oden Eriksson <oeriksson@mandriva.com> 0.9.0-3mdv2009.0
++ Revision: 229893
+- fix deps
+- added a gcc43 patch (gentoo)
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Tue Jan 01 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 0.9.0-1mdv2008.1
++ Revision: 140041
+- new license policy
+- new devel library policy
+- spec file clean
+- new version
+- bump %%major
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Tue Jul 10 2007 Gustavo Pichorim Boiko <boiko@mandriva.com> 0.8.3-2mdv2008.0
++ Revision: 50807
+- Rebuild to fix libosp dependency
+
+* Tue May 29 2007 Frederic Crozat <fcrozat@mandriva.com> 0.8.3-1mdv2008.0
++ Revision: 32526
+- Release 0.8.3
+- Fix buildrequires and prevent libcurl detection, we don't need to build ofxconnect sample binary
+
+
+* Fri Dec 29 2006 Frederic Crozat <fcrozat@mandriva.com> 0.8.2-1mdv2007.0
++ Revision: 102598
+- Release 0.8.2
+- bump major, add conflicts to ease upgrade
+- remove patch0, no longer needed
+- Import libofx
+
+* Mon Dec 05 2005 Christiaan Welvaart <cjw@daneel.dyndns.org> 0.8.0-2mdk
+- add BuildRequires: libcurl-devel
+
+* Fri Dec 02 2005 Götz Waschk <waschk@mandriva.org> 0.8.0-1mdk
+- major 2
+- New release 0.8.0
+
+* Thu Aug 25 2005 Gwenole Beauchesne <gbeauchesne@mandriva.com> 0.7.0-2mdk
+- c++ fixes
+
+* Mon Dec 13 2004 Götz Waschk <waschk@linux-mandrake.com> 0.7.0-1mdk
+- major 1
+- drop patch
+- New release 0.7.0
+
+* Thu Jun 17 2004 Laurent MONTEL <lmontel@mandrakesoft.com> 0.6.6-2mdk
+- Rebuild
+
+* Thu Jan 15 2004 Frederic Crozat <fcrozat@mandrakesoft.com> 0.6.6-1mdk
+- Release 0.6.6
+
