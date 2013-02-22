@@ -12,7 +12,7 @@ URL:		http://libofx.sourceforge.net
 Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	graphviz
-BuildRequires:	OpenSP-devel
+BuildRequires:	opensp-devel
 
 %description
 This is the LibOFX library.  It is a API designed to allow applications to
