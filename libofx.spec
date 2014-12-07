@@ -5,7 +5,7 @@
 Summary:	LibOFX library provides support for OFX command responses
 Name:		libofx
 Version:	0.9.5
-Release:	7
+Release:	8
 Group:		System/Libraries
 License:	GPLv2
 Url:		http://libofx.sourceforge.net
