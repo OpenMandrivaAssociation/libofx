@@ -1,2 +1,4 @@
+removed_sources:
+  libofx-0.9.5.tar.gz: 7e5245d68a0f3f7efad2fd809b2afbbff6ba0e73
 sources:
-  "libofx-0.9.5.tar.gz": 7e5245d68a0f3f7efad2fd809b2afbbff6ba0e73
+  libofx-0.9.13.tar.gz: 15493b27cf72cc9428ad6d40ad738d06630179ba

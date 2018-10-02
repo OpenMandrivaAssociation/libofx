@@ -1,11 +1,11 @@
-%define major	5
+%define major	7
 %define libname	%mklibname ofx %{major}
 %define devname	%mklibname ofx -d
 
 Summary:	LibOFX library provides support for OFX command responses
 Name:		libofx
-Version:	0.9.5
-Release:	12
+Version:	0.9.13
+Release:	1
 Group:		System/Libraries
 License:	GPLv2
 Url:		http://libofx.sourceforge.net
