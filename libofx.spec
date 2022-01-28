@@ -14,6 +14,7 @@ Source0:	https://github.com/libofx/libofx/archive/refs/tags/%{version}/%{name}-%
 BuildRequires:	doxygen
 BuildRequires:	gengetopt
 BuildRequires:	graphviz
+BuildRequires:	help2man
 BuildRequires:	opensp-devel
 BuildRequires:	pkgconfig(libxml++-2.6)
 BuildRequires:	pkgconfig(glibmm-2.4)
