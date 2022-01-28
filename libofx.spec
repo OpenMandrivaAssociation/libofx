@@ -12,6 +12,7 @@ Url:		http://libofx.sourceforge.net
 Source0:	https://github.com/libofx/libofx/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 #Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
+BuildRequires:	gengetopt
 BuildRequires:	graphviz
 BuildRequires:	opensp-devel
 BuildRequires:	pkgconfig(libxml++-2.6)
