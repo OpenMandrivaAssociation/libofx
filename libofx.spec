@@ -76,6 +76,7 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %{_bindir}/*
 %{_datadir}/libofx
 %_mandir/man1/ofxdump.1*
+%{_mandir}/man1/ofxconnect.1.*
 
 %files -n %{libname}
 %{_libdir}/libofx.so.%{major}*
