@@ -4,15 +4,22 @@
 
 Summary:	LibOFX library provides support for OFX command responses
 Name:		libofx
-Version:	0.9.15
+Version:	0.10.3
 Release:	1
 Group:		System/Libraries
 License:	GPLv2
 Url:		http://libofx.sourceforge.net
-Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
+Source0:	https://github.com/libofx/libofx/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
+#Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
+BuildRequires:	gengetopt
 BuildRequires:	graphviz
+BuildRequires:	help2man
 BuildRequires:	opensp-devel
+BuildRequires:	pkgconfig(libxml++-2.6)
+BuildRequires:	pkgconfig(glibmm-2.4)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(libcurl)
 
 %description
 This is the LibOFX library.  It is a API designed to allow applications to
@@ -48,17 +55,18 @@ Libraries needed to develop for libofx.
 %setup -q
 
 %build
+./autogen.sh
 # FIXME: better make it lib64 aware in configure script
 # disable curl detection
-%configure2_5x \
+%configure \
 	--disable-static \
 	--with-opensp-libs=%{_libdir} \
 	--without-libcurl
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 #remove unpackaged files
 rm -rf %{buildroot}%{_docdir}/libofx
@@ -68,6 +76,7 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %{_bindir}/*
 %{_datadir}/libofx
 %_mandir/man1/ofxdump.1*
+%{_mandir}/man1/ofxconnect.1.*
 
 %files -n %{libname}
 %{_libdir}/libofx.so.%{major}*
