@@ -55,7 +55,7 @@ Libraries needed to develop for libofx.
 %setup -q
 
 %build
-./autogen.sh
+#./autogen.sh
 # FIXME: better make it lib64 aware in configure script
 # disable curl detection
 %configure \
