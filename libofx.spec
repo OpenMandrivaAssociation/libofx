@@ -11,6 +11,7 @@ License:	GPLv2
 Url:		http://libofx.sourceforge.net
 Source0:	https://github.com/libofx/libofx/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 #Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
+BuildRequires:	cmake	
 BuildRequires:	doxygen
 BuildRequires:	gengetopt
 BuildRequires:	graphviz
@@ -55,18 +56,12 @@ Libraries needed to develop for libofx.
 %setup -q
 
 %build
-#./autogen.sh
-# FIXME: better make it lib64 aware in configure script
-# disable curl detection
-%configure \
-	--disable-static \
-	--with-opensp-libs=%{_libdir} \
-	--without-libcurl
+%cmake
 
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 #remove unpackaged files
 rm -rf %{buildroot}%{_docdir}/libofx
@@ -75,15 +70,16 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %doc AUTHORS ChangeLog NEWS README totest.txt 
 %{_bindir}/*
 %{_datadir}/libofx
-%_mandir/man1/ofxdump.1*
-%{_mandir}/man1/ofxconnect.1.*
+#_mandir/man1/ofxdump.1*
+#{_mandir}/man1/ofxconnect.1.*
 
 %files -n %{libname}
 %{_libdir}/libofx.so.%{major}*
 
 %files -n %{devname}
-%doc doc/html doc/ofx_sample_files
+#doc doc/html doc/ofx_sample_files
 %{_libdir}/*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
+%{_libdir}/cmake/libofx/
 
