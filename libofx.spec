@@ -77,7 +77,7 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %{_libdir}/libofx.so.%{major}*
 
 %files -n %{devname}
-%doc doc/html doc/ofx_sample_files
+#doc doc/html doc/ofx_sample_files
 %{_libdir}/*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
