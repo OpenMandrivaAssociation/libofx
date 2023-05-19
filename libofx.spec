@@ -70,8 +70,8 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %doc AUTHORS ChangeLog NEWS README totest.txt 
 %{_bindir}/*
 %{_datadir}/libofx
-%_mandir/man1/ofxdump.1*
-%{_mandir}/man1/ofxconnect.1.*
+#_mandir/man1/ofxdump.1*
+#{_mandir}/man1/ofxconnect.1.*
 
 %files -n %{libname}
 %{_libdir}/libofx.so.%{major}*
