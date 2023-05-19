@@ -81,4 +81,5 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %{_libdir}/*.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
+%{_libdir}/cmake/libofx/
 
