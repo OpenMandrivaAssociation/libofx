@@ -8,7 +8,7 @@ Version:	0.10.9
 Release:	1
 Group:		System/Libraries
 License:	GPLv2
-Url:		http://libofx.sourceforge.net
+Url:		https://libofx.sourceforge.net
 Source0:	https://github.com/libofx/libofx/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 #Source0:	http://download.sourceforge.net/libofx/%{name}-%{version}.tar.gz
 BuildRequires:	cmake	
