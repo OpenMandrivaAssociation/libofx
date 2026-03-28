@@ -1,0 +1,96 @@
+diff -up libofx-0.10.9/CMakeLists.txt.omv~ libofx-0.10.9/CMakeLists.txt
+--- libofx-0.10.9/CMakeLists.txt.omv~	2026-03-28 00:26:39.812644353 +0100
++++ libofx-0.10.9/CMakeLists.txt	2026-03-28 00:26:50.839195103 +0100
+@@ -74,7 +74,7 @@ if (ENABLE_OFXCONNECT)
+     set_package_properties(PkgConfig PROPERTIES TYPE REQUIRED PURPOSE "ENABLE_OFXCONNECT is ON, so we need PkgConfig to locate the libxml++ library")
+ 
+     if (PkgConfig_FOUND)
+-        pkg_check_modules(LIBXMLPP REQUIRED IMPORTED_TARGET libxml++-2.6>=2.6)
++        pkg_check_modules(LIBXMLPP REQUIRED IMPORTED_TARGET libxml++-5.0>=5.0)
+         #TODO: if not found, handle the feature_summary by hand somehow
+     endif ()
+ endif ()
+diff -up libofx-0.10.9/ofxconnect/nodeparser.cpp.omv~ libofx-0.10.9/ofxconnect/nodeparser.cpp
+--- libofx-0.10.9/ofxconnect/nodeparser.cpp.omv~	2026-03-28 00:30:16.581829987 +0100
++++ libofx-0.10.9/ofxconnect/nodeparser.cpp	2026-03-28 00:34:31.748850969 +0100
+@@ -22,7 +22,7 @@
+ using std::string;
+ using std::vector;
+ 
+-NodeParser::NodeParser(const xmlpp::Node::NodeList& list): xmlpp::Node::NodeList(list)
++NodeParser::NodeParser(const xmlpp::Node::const_NodeList& list): xmlpp::Node::const_NodeList(list)
+ {
+ }
+ 
+@@ -33,8 +33,8 @@ NodeParser::NodeParser(const xmlpp::Node
+ 
+ NodeParser::NodeParser(const xmlpp::DomParser& parser)
+ {
+-  xmlpp::Node* node = parser.get_document()->get_root_node();
+-  push_back(const_cast<xmlpp::Node*>(node));
++  const xmlpp::Node* node = parser.get_document()->get_root_node();
++  push_back(node);
+ }
+ 
+ NodeParser NodeParser::Path(const xmlpp::Node* node, const std::string& path)
+@@ -54,8 +54,8 @@ NodeParser NodeParser::Path(const xmlpp:
+   }
+ 
+   // find the first level nodes that match
+-  xmlpp::Node::NodeList list = node->get_children();
+-  for (xmlpp::Node::NodeList::iterator iter = list.begin(); iter != list.end(); ++iter)
++  const xmlpp::Node::const_NodeList list = node->get_children();
++  for (xmlpp::Node::const_NodeList::const_iterator iter = list.begin(); iter != list.end(); ++iter)
+   {
+     if ( (*iter)->get_name() == key )
+     {
+@@ -95,13 +95,13 @@ NodeParser NodeParser::Select(const std:
+   NodeParser result;
+   for (const_iterator iter = begin(); iter != end(); ++iter)
+   {
+-    xmlpp::Node::NodeList list2 = (*iter)->get_children();
+-    for (xmlpp::Node::NodeList::const_iterator iter3 = list2.begin(); iter3 != list2.end(); ++iter3)
++    xmlpp::Node::const_NodeList list2 = (*iter)->get_children();
++    for (xmlpp::Node::const_NodeList::const_iterator iter3 = list2.begin(); iter3 != list2.end(); ++iter3)
+     {
+       if ( (*iter3)->get_name() == key )
+       {
+-        xmlpp::Node::NodeList list3 = (*iter3)->get_children();
+-        for (xmlpp::Node::NodeList::const_iterator iter4 = list3.begin(); iter4 != list3.end(); ++iter4)
++        xmlpp::Node::const_NodeList list3 = (*iter3)->get_children();
++        for (xmlpp::Node::const_NodeList::const_iterator iter4 = list3.begin(); iter4 != list3.end(); ++iter4)
+         {
+           const xmlpp::TextNode* nodeText = dynamic_cast<const xmlpp::TextNode*>(*iter4);
+           if ( nodeText && nodeText->get_content() == value )
+@@ -119,11 +119,11 @@ vector<string> NodeParser::Text(void) co
+   vector<string> result;
+ 
+   // Go through the list of nodes
+-  for (xmlpp::Node::NodeList::const_iterator iter = begin(); iter != end(); ++iter)
++  for (xmlpp::Node::const_NodeList::const_iterator iter = begin(); iter != end(); ++iter)
+   {
+     // Find the text child node, and print that
+-    xmlpp::Node::NodeList list = (*iter)->get_children();
+-    for (xmlpp::Node::NodeList::const_iterator iter2 = list.begin(); iter2 != list.end(); ++iter2)
++    xmlpp::Node::const_NodeList list = (*iter)->get_children();
++    for (xmlpp::Node::const_NodeList::const_iterator iter2 = list.begin(); iter2 != list.end(); ++iter2)
+     {
+       const xmlpp::TextNode* nodeText = dynamic_cast<const xmlpp::TextNode*>(*iter2);
+       if ( nodeText )
+diff -up libofx-0.10.9/ofxconnect/nodeparser.h.omv~ libofx-0.10.9/ofxconnect/nodeparser.h
+--- libofx-0.10.9/ofxconnect/nodeparser.h.omv~	2026-03-28 00:33:02.996839278 +0100
++++ libofx-0.10.9/ofxconnect/nodeparser.h	2026-03-28 00:33:13.813390248 +0100
+@@ -24,11 +24,11 @@
+ #include <vector>
+ #include <libxml++/libxml++.h>
+ 
+-class NodeParser: public xmlpp::Node::NodeList
++class NodeParser: public xmlpp::Node::const_NodeList
+ {
+ public:
+   NodeParser(void) {}
+-  NodeParser(const xmlpp::Node::NodeList&);
++  NodeParser(const xmlpp::Node::const_NodeList&);
+   NodeParser(const xmlpp::Node*);
+   NodeParser(const xmlpp::DomParser&);
+ 

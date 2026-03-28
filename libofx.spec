@@ -17,10 +17,14 @@ BuildRequires:	gengetopt
 BuildRequires:	graphviz
 BuildRequires:	help2man
 BuildRequires:	opensp-devel
-BuildRequires:	pkgconfig(libxml++-2.6)
+BuildRequires:	pkgconfig(libxml++-5.0)
 BuildRequires:	pkgconfig(glibmm-2.4)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(libcurl)
+BuildSystem:	cmake
+
+%patchlist
+libofx-0.10.9-libxml++-5.0.patch
 
 %description
 This is the LibOFX library.  It is a API designed to allow applications to
@@ -52,17 +56,7 @@ Provides:	%{name}-devel = %{version}-%{release}
 %description -n %{devname}
 Libraries needed to develop for libofx.
 
-%prep
-%setup -q
-
-%build
-%cmake
-
-%make_build
-
-%install
-%make_install -C build
-
+%install -a
 #remove unpackaged files
 rm -rf %{buildroot}%{_docdir}/libofx
 
@@ -82,4 +76,3 @@ rm -rf %{buildroot}%{_docdir}/libofx
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/cmake/libofx/
-
